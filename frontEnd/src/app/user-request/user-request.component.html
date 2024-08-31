@@ -1,0 +1,67 @@
+<div class="container">
+    <h2>Solicitudes de Solapines</h2>
+  
+    <h3>Crear Nueva Solicitud</h3>
+    <form class="mat-form" (ngSubmit)="createRequest()" #solicitudForm="ngForm">
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput [(ngModel)]="reqFirstName" name="Nombre" required #reqFirstNameInput="ngModel">
+        <mat-error *ngIf="reqFirstNameInput.invalid && (reqFirstNameInput.dirty || reqFirstNameInput.touched)">
+          Nombre es requerido.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label >Apellidos</mat-label>
+        <input matInput [(ngModel)]="reqLastName" name="Apellidos" required #reqLastNameInput="ngModel">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Codigo de Trabajador</mat-label>
+        <input matInput [(ngModel)]="reqWorkerCode" name="Codigo de Trabajador" required #reqWorkerCodeInput="ngModel">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Departamento</mat-label>
+        <input matInput [(ngModel)]="reqDepartment" name="Departamento" required>
+      </mat-form-field>
+      <button mat-flat-button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+      <div *ngIf="reqMessage" class="alert alert-info mt-2">{{ reqMessage }}</div>
+    </form>
+  
+    <h3>Estado de Mis Solicitudes</h3>
+    <table mat-table [dataSource]="requests" class="mat-elevation-z8">
+      <ng-container matColumnDef="ID">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let req"> {{req.reqId  }} </td>
+      </ng-container>
+      <ng-container matColumnDef="Nombre">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let req"> {{req.reqFirstName  }} </td>
+      </ng-container>
+      <ng-container matColumnDef="Apellidos">
+        <th mat-header-cell *matHeaderCellDef> Apellidos </th>
+        <td mat-cell *matCellDef="let req"> {{req.reqLastName}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Codigo de trabajador">
+        <th mat-header-cell *matHeaderCellDef> Codigo de trabajador </th>
+        <td mat-cell *matCellDef="let req"> {{req.reqWorkerCode  }} </td>
+      </ng-container>
+      <ng-container matColumnDef="Estado">
+        <th mat-header-cell *matHeaderCellDef> Estado</th>
+        <td mat-cell *matCellDef="let req"> {{req.status  }} </td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="Acciones">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td mat-cell *matCellDef="let req">
+          <button mat-icon-button color="warn" (click)="deleteUser(user.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="showChangePassOption(user)">
+            <mat-icon>update</mat-icon>
+          </button>
+        </td>
+      </ng-container> -->
+
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+  </div>

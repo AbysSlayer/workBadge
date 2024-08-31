@@ -1,0 +1,72 @@
+<h2>Reportes de Solapines</h2>
+
+<h3>Cantidad de Solapines por Mes</h3>
+<table mat-table [dataSource]="amountPerMonth" class="mat-elevation-z8">
+  <ng-container matColumnDef="mes">
+    <th mat-header-cell *matHeaderCellDef> Mes </th>
+    <td mat-cell *matCellDef="let element"> {{element.Fecha}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="cantidad">
+    <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+    <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['mes', 'cantidad']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['mes', 'cantidad'];"></tr>
+</table>
+
+<h3>Detalles de Solapines por Mes</h3>
+<!-- <form (ngSubmit)="getDetailedBadges()">
+  <mat-form-field>
+    <mat-label>Mes</mat-label>
+    <input matInput [(ngModel)]="month" name="Mes" required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Año</mat-label>
+    <input matInput [(ngModel)]="year" name="Año" required>
+  </mat-form-field>
+  <button mat-raised-button type="submit">Obtener Detalles</button>
+</form> -->
+<form (ngSubmit)="getDetailedBadges()">
+    <mat-form-field class="yearSelect">
+        <mat-label>Mes</mat-label>
+        <mat-select [(ngModel)]="month" name="month" required>
+            <mat-option *ngFor="let month of months" [value]="month">{{month}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="yearSelect">
+        <mat-label>Año</mat-label>
+        <mat-select [(ngModel)]="year" name="year" required>
+            <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button mat-raised-button type="submit">Obtener Detalles</button>
+</form>
+
+
+<table mat-table [dataSource]="detailedBadges" class="mat-elevation-z8">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let badge"> {{badge.badgeId}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let badge"> {{badge.solFirstName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lastname">
+    <th mat-header-cell *matHeaderCellDef> Apellidos </th>
+    <td mat-cell *matCellDef="let badge"> {{badge.solLastName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="createdAt">
+    <th mat-header-cell *matHeaderCellDef> Fecha de Creación </th>
+    <td mat-cell *matCellDef="let badge"> {{badge.createdAt | date}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['id', 'name', 'lastname','createdAt']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['id', 'name', 'lastname','createdAt'];"></tr>
+</table>

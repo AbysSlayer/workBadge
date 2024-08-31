@@ -1,0 +1,33 @@
+<div class="container">
+    <h2>Gestión de Solapines</h2>
+    <table mat-table [dataSource]="badges" class="mat-elevation-z8">
+      <ng-container matColumnDef="ID">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let badge"> {{badge.badgeId}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Nombre">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let badge"> {{badge.solFirstName  }} </td>
+      </ng-container>
+      <ng-container matColumnDef="Apellidos">
+        <th mat-header-cell *matHeaderCellDef> Apellidos </th>
+        <td mat-cell *matCellDef="let badge"> {{badge.solLastName }} </td>
+      </ng-container>
+      <ng-container matColumnDef="Codigo de Trabajador">
+        <th mat-header-cell *matHeaderCellDef> Codigo de Trabajador </th>
+        <td mat-cell *matCellDef="let badge"> {{badge.solWorkerCode  }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Acciones">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td mat-cell *matCellDef="let badge">
+          <button mat-icon-button color="warn" (click)="deleteBadge(badge.userId, badge.badgeId)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>  
+</div>

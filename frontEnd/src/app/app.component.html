@@ -1,0 +1,13 @@
+<mat-toolbar class="mat-toolbar" color="primary">
+  <span>{{ title }}</span>
+  <span class="spacer"></span>
+  <li class="nav-item" *ngIf="!isAuthenticated()"> <!-- Mostrar solo si no está autenticado -->
+    <a mat-button routerLink="/login">Iniciar Sesión</a>
+  </li>
+  <a class="dashboard-button" mat-raised-button routerLink="/dashboard">Dashboard</a>
+  <button mat-flat-button (click)="logout()" class="btn btn-danger">Cerrar Sesión</button>
+</mat-toolbar>
+
+<div class="container mt-4">
+  <router-outlet></router-outlet> <!-- Aquí se cargarán los componentes según la ruta -->
+</div>

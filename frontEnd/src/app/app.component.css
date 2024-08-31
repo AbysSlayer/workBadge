@@ -1,0 +1,13 @@
+.spacer {
+    flex: 1 1 auto;
+  }
+
+.dashboard-button{
+  margin-right: 10px;
+}
+
+.mat-toolbar{
+  background-color: rgb(218, 53, 53);
+  border-radius: 5px;
+  
+}
