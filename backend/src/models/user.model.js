@@ -52,6 +52,11 @@ User.init(
       defaultValue: "client"
     },
 
+    profilePicture: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    
     reqId: {
       type: DataTypes.INTEGER,
       allowNull: true,

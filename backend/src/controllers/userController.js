@@ -17,6 +17,8 @@ const findAll = async (req, res) => {
 };
 
 const addUser = async (req, res) => {
+  const profilePicture = req.file ? `http://localhost:3000/assets/${req.file.filename}` : null;
+  console.log(profilePicture)
   const dataUser = req.body;
   console.log(dataUser);
   await Users.sync();
@@ -28,9 +30,10 @@ const addUser = async (req, res) => {
     lastName: dataUser.lastName,
     workerCode: dataUser.workerCode,
     department: dataUser.department,
+    profilePicture: profilePicture  
   });
-  const token = jwt.sign({id: dataUser.userId, username: dataUser.username}, 'tu_secreto', {expiresIn: '1h'});
-  return res.json({"success": true, "token": token, "userId": dataUser.userId, 'workerCode': dataUser.workerCode, 'role': "client"})
+  const token = jwt.sign({user: createUser, id: dataUser.userId, username: dataUser.username}, 'tu_secreto', {expiresIn: '1h'});
+  return res.json({"success": true,'user': createUser ,"token": token, "userId": dataUser.userId, 'workerCode': dataUser.workerCode, 'role': "client"})
   // res.status(201).json({
   //   ok: true,
   //   status: 201,
@@ -46,6 +49,7 @@ const findById = async (req, res) => {
       userId: id,
     },
   });
+  console.log(user)
   res.status(200).json({
     exists: !!user,
   });
@@ -59,6 +63,7 @@ const getUserById = async (req, res) => {
       userId: id,
     },
   });
+  console.log(user)
   res.status(200).json({
     body: user
   });

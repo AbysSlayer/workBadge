@@ -6,7 +6,7 @@ const sequelize = methodsDB.createConnection();
 const main = () => {
   app.listen(app.get("port"));
   console.log(`Server on port ${app.get("port")}`);
-  sequelize.sync();
+  // sequelize.sync();
 };
 
 main();
