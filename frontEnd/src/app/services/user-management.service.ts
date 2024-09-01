@@ -21,4 +21,8 @@ export class UserManagement {
   updateUser(toModifyUID: string, userId: string, username: string, password: string, firstName: string, lastName: string, workerCode: string, ): Observable<any>{
     return this.http.put<any>(`${this.apiURL}/updateUser/${toModifyUID}`, {userId, username, password, firstName, lastName, workerCode})
   }
+
+  getUser(userId: string): Observable<any>{
+    return this.http.get(`${this.apiURL}/getUserById/${userId}`)
+  }
 }

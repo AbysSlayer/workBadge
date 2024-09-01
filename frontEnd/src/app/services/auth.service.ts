@@ -36,13 +36,14 @@ export class AuthService {
     return role == 'admin'
   }
 
-  register(userId: string, username: string, password: string, firstName: string, lastName: string, workerCode: string, department: string): Observable<any> {
-    return this.http.post<any>(`${this.apiURL}/addUser`, {userId, username, password, firstName, lastName, workerCode, department })
+  register(formData: FormData): Observable<any> {
+    return this.http.post<any>(`${this.apiURL}/addUser`, formData)
     .pipe(tap(response => {
       if(response.success){
         console.log(response.userId)
         console.log(response.workerCode)
         console.log(response.role)
+        console.log(formData.get('profilePicture'))
         localStorage.setItem('token', response.token)
         localStorage.setItem('userId', response.userId)
         localStorage.setItem('workerCode', response.workerCode)

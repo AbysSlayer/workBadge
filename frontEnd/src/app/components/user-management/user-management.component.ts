@@ -37,8 +37,9 @@ export class UserManagementComponent implements OnInit {
   }
 
   deleteUser(userId: string){
+    console.log(userId)
     this.userManagementSvc.deleteUser(userId).subscribe((response)=>{
-      this.loadAllUsers()
+    this.loadAllUsers()
     },
   (error) => {
         console.error('Error al eliminar usuario', error);

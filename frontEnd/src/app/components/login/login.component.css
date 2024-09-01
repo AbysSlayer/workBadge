@@ -1,0 +1,13 @@
+.matCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+.card-title{
+    margin-top: 10px;
+}
+
+.mt-3{
+    margin-top: 10px;
+}

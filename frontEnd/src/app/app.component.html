@@ -1,11 +1,13 @@
 <mat-toolbar class="mat-toolbar" color="primary">
   <span>{{ title }}</span>
   <span class="spacer"></span>
-  <li class="nav-item" *ngIf="!isAuthenticated()"> <!-- Mostrar solo si no está autenticado -->
-    <a mat-button routerLink="/login">Iniciar Sesión</a>
-  </li>
-  <a class="dashboard-button" mat-raised-button routerLink="/dashboard">Dashboard</a>
-  <button mat-flat-button (click)="logout()" class="btn btn-danger">Cerrar Sesión</button>
+   <!-- Mostrar solo si no está autenticado -->
+  <a class="loginButton" *ngIf="!isAuthenticated()" mat-raised-button routerLink="/login">Iniciar Sesión</a>
+  <div *ngIf="isAuthenticated()" class="user-info">
+    <a mat-raised-button routerLink="/dashboard">Dashboard</a>
+    <button mat-flat-button (click)="logout()" class="btn btn-danger">Cerrar Sesión</button>
+    <!-- <img [src]="user?.profilePicture" alt="Foto de Perfil" class="profile-picture" *ngIf="user?.profilePicture"> -->
+  </div>
 </mat-toolbar>
 
 <div class="container mt-4">

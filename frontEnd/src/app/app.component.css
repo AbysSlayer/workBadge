@@ -9,5 +9,14 @@
 .mat-toolbar{
   background-color: rgb(218, 53, 53);
   border-radius: 5px;
-  
+}
+.loginButton{
+  margin-right: 10px;
+}
+
+.profile-picture {
+  width: 40px; /* Ajusta el tamaño según tus necesidades */
+  height: 40px;
+  border-radius: 50%; /* Para hacerla circular */
+  margin-right: 10px; /* Espacio entre la foto y el texto */
 }

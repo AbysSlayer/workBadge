@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,7 @@ export class LoginComponent implements OnInit {
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar) {}
   ngOnInit(): void {
     if (!this.authService.isAuthenticated()) {
       this.router.navigate(['/login']);
@@ -28,7 +30,10 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('userId', response.userId)
         localStorage.setItem('workerCode', response.workerCode)
         localStorage.setItem('role', response.role)
-        this.router.navigate(['/dashboard']);
+        this.showAlert("Redirigiendo a la pagina principal")
+        setTimeout(()=>{
+          this.router.navigate(['/dashboard'])
+        }, 2000)
         } else {
           this.errorMessage = 'Inicio de sesión fallido. Verifica tus credenciales.';
         }
@@ -38,6 +43,12 @@ export class LoginComponent implements OnInit {
         this.errorMessage = 'Ocurrió un error. Intenta nuevamente más tarde.';
       }
     );
+  }
+
+  showAlert(message: string){
+    this.snackBar.open(message, 'Aceptar', {
+      duration: 1000
+    })
   }
 }
 

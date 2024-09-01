@@ -26,10 +26,10 @@
         <td mat-cell *matCellDef="let req"> {{req.reqDepartment  }} </td>
       </ng-container>
       
-      <ng-container matColumnDef="Acciones">
+      <ng-container  matColumnDef="Acciones">
         <th mat-header-cell *matHeaderCellDef> Acciones </th>
         <td mat-cell *matCellDef="let req">
-          <button mat-flat-button color="warn" (click)="convertToBadge(req.reqFirstName, req.reqLastName, req.reqWorkerCode, req.userId)">Crear Solapin
+          <button *ngIf="req.status !='Finished'" mat-flat-button color="warn" (click)="convertToBadge(req.reqFirstName, req.reqLastName, req.reqWorkerCode, req.userId)">Crear Solapin
           </button>
         </td>
       </ng-container>

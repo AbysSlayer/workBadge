@@ -29,9 +29,8 @@
         <mat-label >Departamento</mat-label>
         <input matInput [(ngModel)]="department" name="Departamento" required>
       </mat-form-field>
+      <!-- <input type="file" id="profilePicture" (change)="onFileSelected($event)" accept="image/*"> -->
 
       <button mat-flat-button type="submit" class="btn btn-primary">Registrar</button>
-      <div *ngIf="errorMessage" class="alert alert-danger mt-2">{{ errorMessage }}</div>
-      <div *ngIf="successMessage" class="alert alert-success mt-2">{{ successMessage }}</div>
     </form>
   </div>
