@@ -24,10 +24,13 @@
           <button mat-icon-button color="warn" (click)="deleteBadge(badge.userId, badge.badgeId)">
             <mat-icon>delete</mat-icon>
           </button>
+          <button *ngIf="!badge.userId" mat-icon-button color="primary" (click)="openBadge(badge)">
+            <mat-icon>badge</mat-icon>
+          </button>
         </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="columns"></tr>
       <tr mat-row *matRowDef="let row; columns: columns;"></tr>
-    </table>  
+    </table>
 </div>

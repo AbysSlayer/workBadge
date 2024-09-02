@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { last, Observable, of, tap } from 'rxjs';
+import { FormGroup } from '@angular/forms';
 
 
 @Injectable({
@@ -36,14 +37,14 @@ export class AuthService {
     return role == 'admin'
   }
 
-  register(formData: FormData): Observable<any> {
+  register(formData: FormGroup): Observable<any> {
+    console.log(formData)
     return this.http.post<any>(`${this.apiURL}/addUser`, formData)
     .pipe(tap(response => {
       if(response.success){
         console.log(response.userId)
         console.log(response.workerCode)
         console.log(response.role)
-        console.log(formData.get('profilePicture'))
         localStorage.setItem('token', response.token)
         localStorage.setItem('userId', response.userId)
         localStorage.setItem('workerCode', response.workerCode)

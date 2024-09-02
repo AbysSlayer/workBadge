@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,8 @@ export class userRequestService {
 
   constructor(private http: HttpClient) {}
 
-  createRequest(reqUserId: string | null, reqFirstName: string, reqLastName: string, reqWorkerCode: string, reqDepartment: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/addRequest`, { reqFirstName, reqLastName, reqWorkerCode, reqDepartment });
+  createRequest(formData: FormGroup): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/addRequest`, formData);
   }
 
   getUserRequests(reqWorkerCode: string | null): Observable<any> {

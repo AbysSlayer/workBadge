@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Código QR</h2>
+<mat-dialog-content>
+  <canvas id="qr-code"></canvas> <!-- Elemento canvas donde se generará el QR -->
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="printQRCode()">Imprimir</button>
+  <button mat-button (click)="onNoClick()">Cerrar</button>
+</mat-dialog-actions>

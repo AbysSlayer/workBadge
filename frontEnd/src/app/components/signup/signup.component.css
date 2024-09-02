@@ -1,5 +1,10 @@
-.mat-form {
+.formGroup {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
   }
+
+.error {
+  color: red; /* Color rojo para los mensajes de error */
+  margin-left: 10px; /* Espacio entre el campo y el mensaje */
+}  

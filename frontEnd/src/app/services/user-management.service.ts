@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
+import { FormGroup } from '@angular/forms';
 
 
 @Injectable({
@@ -18,8 +19,8 @@ export class UserManagement {
     return this.http.delete(`${this.apiURL}/deleteUser/${userId}`)
   }
 
-  updateUser(toModifyUID: string, userId: string, username: string, password: string, firstName: string, lastName: string, workerCode: string, ): Observable<any>{
-    return this.http.put<any>(`${this.apiURL}/updateUser/${toModifyUID}`, {userId, username, password, firstName, lastName, workerCode})
+  updateUser(toModifyUID: string, formData: FormGroup): Observable<any>{
+    return this.http.put<any>(`${this.apiURL}/updateUser/${toModifyUID}`, formData)
   }
 
   getUser(userId: string): Observable<any>{

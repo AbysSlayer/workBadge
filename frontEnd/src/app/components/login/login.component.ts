@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.authService.login(this.username, this.password).subscribe(
       (response) => {
+        console.log(response)
         if (response.success) {
         localStorage.setItem('token', response.token);
         localStorage.setItem('userId', response.userId)
@@ -34,8 +35,9 @@ export class LoginComponent implements OnInit {
         setTimeout(()=>{
           this.router.navigate(['/dashboard'])
         }, 2000)
-        } else {
-          this.errorMessage = 'Inicio de sesión fallido. Verifica tus credenciales.';
+        } else{
+          console.log(response.message)
+          this.showAlert(response.message)
         }
       },
       (error) => {
@@ -47,7 +49,7 @@ export class LoginComponent implements OnInit {
 
   showAlert(message: string){
     this.snackBar.open(message, 'Aceptar', {
-      duration: 1000
+      duration: 2000
     })
   }
 }

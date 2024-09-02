@@ -2,25 +2,26 @@
     <h2>Solicitudes de Solapines</h2>
   
     <h3>Crear Nueva Solicitud</h3>
-    <form class="mat-form" (ngSubmit)="createRequest()" #solicitudForm="ngForm">
-      <mat-form-field>
+    <form class="formGroup" [formGroup]="requestForm" (ngSubmit)="createRequest()">
+      <mat-form-field appearance="fill">
         <mat-label>Nombre</mat-label>
-        <input matInput [(ngModel)]="reqFirstName" name="Nombre" required #reqFirstNameInput="ngModel">
-        <mat-error *ngIf="reqFirstNameInput.invalid && (reqFirstNameInput.dirty || reqFirstNameInput.touched)">
-          Nombre es requerido.
-        </mat-error>
+        <input matInput formControlName="reqFirstName" >
+        <mat-error *ngIf="requestForm.get('reqFirstName')?.hasError('required')">El nombre es necesario</mat-error>
       </mat-form-field>
-      <mat-form-field>
-        <mat-label >Apellidos</mat-label>
-        <input matInput [(ngModel)]="reqLastName" name="Apellidos" required #reqLastNameInput="ngModel">
+      <mat-form-field appearance="fill">
+        <mat-label>Apellidos</mat-label>
+        <input matInput formControlName="reqLastName" >
+        <mat-error *ngIf="requestForm.get('reqLastName')?.hasError('required')">Los apellidos son necesarios</mat-error>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field appearance="fill">
         <mat-label>Codigo de Trabajador</mat-label>
-        <input matInput [(ngModel)]="reqWorkerCode" name="Codigo de Trabajador" required #reqWorkerCodeInput="ngModel">
+        <input matInput formControlName="reqWorkerCode" >
+        <mat-error *ngIf="requestForm.get('reqWorkerCode')?.hasError('required')">El codigo de trabajador es necesario</mat-error>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field appearance="fill">
         <mat-label>Departamento</mat-label>
-        <input matInput [(ngModel)]="reqDepartment" name="Departamento" required>
+        <input matInput formControlName="reqDepartment" >
+        <mat-error *ngIf="requestForm.get('reqDepartment')?.hasError('required')">El nombre es necesario</mat-error>
       </mat-form-field>
       <button mat-flat-button type="submit" class="btn btn-primary">Enviar Solicitud</button>
       <div *ngIf="reqMessage" class="alert alert-info mt-2">{{ reqMessage }}</div>

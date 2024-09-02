@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { BadgesService } from '../../services/badges.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { BadgeGenComponent } from '../badge-gen/badge-gen.component';
 
 @Component({
   selector: 'app-badges-management',
@@ -8,9 +10,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './badges-management.component.css'
 })
 export class BadgesManagementComponent implements OnInit{
+  showBadge: boolean = false
+  badgeData: any
   badges: any[] = []
   columns: string[] = ["ID","Nombre", "Apellidos", "Codigo de Trabajador", "Acciones"]
-  constructor(private badgesSvc: BadgesService, private snackBar: MatSnackBar){}
+  constructor(public dialog: MatDialog ,private badgesSvc: BadgesService, private snackBar: MatSnackBar){
+  }
 
   ngOnInit(): void {
     this.loadBadges()
@@ -33,10 +38,20 @@ export class BadgesManagementComponent implements OnInit{
     })
   }
 
+  openBadge(userData: any) {
+    const dialogRef = this.dialog.open(BadgeGenComponent, {
+      width: '400px',
+      data: { userData: userData }, // Pasa los datos del solapín
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('El diálogo se cerró');
+    });
+
+  }
   showAlert(message: string){
     this.snackBar.open(message, 'Aceptar', {
       duration: 3000
     })
   }
-
 }

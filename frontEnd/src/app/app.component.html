@@ -4,7 +4,7 @@
    <!-- Mostrar solo si no está autenticado -->
   <a class="loginButton" *ngIf="!isAuthenticated()" mat-raised-button routerLink="/login">Iniciar Sesión</a>
   <div *ngIf="isAuthenticated()" class="user-info">
-    <a mat-raised-button routerLink="/dashboard">Dashboard</a>
+    <a class="mainPage" mat-raised-button routerLink="/dashboard">Página Principal</a>
     <button mat-flat-button (click)="logout()" class="btn btn-danger">Cerrar Sesión</button>
     <!-- <img [src]="user?.profilePicture" alt="Foto de Perfil" class="profile-picture" *ngIf="user?.profilePicture"> -->
   </div>
