@@ -14,18 +14,30 @@ const reqFindAll = async (req, res) => {
 };
 
 const addRequest = async (req, res) => {
+  const {reqFirstName, reqLastName, reqWorkerCode, reqDepartment} = req.body;
+  console.log(req.body)
+  if (!reqFirstName || reqFirstName.trim() === '') {
+    return res.status(400).json({ message: 'El nombre es obligatorio.' });
+  }
+  if (!reqLastName || reqLastName.trim() === '') {
+    return res.status(400).json({ message: 'El apellido es obligatorio.' });
+  }
+  if (!reqWorkerCode || reqWorkerCode.trim() === '') {
+    return res.status(400).json({ message: 'El código de trabajador es obligatorio.' });
+  }
+  if (!reqDepartment || reqDepartment.trim() === '') {
+    return res.status(400).json({ message: 'El departamento es obligatorio.' });
+  }
   try {
-    const dataRequest = req.body;
-    console.log(dataRequest);
     await Requests.sync();
-    const reqWorker = dataRequest.reqWorkerCode;
+    const reqWorker = reqWorkerCode;
     console.log(reqWorker);
     const reqExists = await Requests.findOne({
       where: {
         reqWorkerCode: reqWorker,
       },
     });
-    if (reqExists.status == 'Pending') {
+    if (reqExists != null && reqExists.status == 'Pending') {
       return res.status(404).json({
         ok: false,
         status: 404,
@@ -47,10 +59,10 @@ const addRequest = async (req, res) => {
     }
     if (reqExists == null && userExists != null) {
       const createRequest = await Requests.create({
-        reqFirstName: dataRequest.reqFirstName,
-        reqLastName: dataRequest.reqLastName,
-        reqWorkerCode: dataRequest.reqWorkerCode,
-        reqDepartment: dataRequest.reqDepartment,
+        reqFirstName: reqFirstName,
+        reqLastName: reqLastName,
+        reqWorkerCode: reqWorkerCode,
+        reqDepartment: reqDepartment,
         userId: userExists.userId,
       });
       console.log(createRequest);
@@ -80,10 +92,10 @@ const addRequest = async (req, res) => {
       })
 
       const createRequest = await Requests.create({
-        reqFirstName: dataRequest.reqFirstName,
-        reqLastName: dataRequest.reqLastName,
-        reqWorkerCode: dataRequest.reqWorkerCode,
-        reqDepartment: dataRequest.reqDepartment,
+        reqFirstName: reqFirstName,
+        reqLastName: reqLastName,
+        reqWorkerCode: reqWorkerCode,
+        reqDepartment: reqDepartment,
         userId: userExists.userId,
       });
       console.log(createRequest);
